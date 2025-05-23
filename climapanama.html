@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Perspectivas Climáticas Panamá 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray-blue background */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem; /* 24px */
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .stat-value {
+            font-size: 2.25rem; /* 36px */
+            font-weight: bold;
+            line-height: 2.5rem; /* 40px */
+        }
+        .section-title {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 600;
+            margin-bottom: 1rem; /* 16px */
+            color: #073B4C; /* Dark Midnight Blue from palette */
+        }
+        .sub-section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-top: 1.5rem; /* 24px */
+            margin-bottom: 0.75rem; /* 12px */
+            color: #118AB2; /* Cerulean Blue from palette */
+        }
+        .palette-energetic-playful-coral { color: #FF6B6B; }
+        .palette-energetic-playful-yellow { color: #FFD166; }
+        .palette-energetic-playful-green { color: #06D6A0; }
+        .palette-energetic-playful-blue { color: #118AB2; }
+        .palette-energetic-playful-darkblue { color: #073B4C; }
+
+        .bg-palette-darkblue { background-color: #073B4C; }
+        .text-palette-coral { color: #FF6B6B; }
+        .text-palette-yellow { color: #FFD166; }
+        .text-palette-green { color: #06D6A0; }
+        .text-palette-blue { color: #118AB2; }
+
+        /* Flowchart like elements */
+        .flow-item {
+            border: 2px solid #118AB2; /* Cerulean Blue */
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #118AB2; /* Cerulean Blue */
+            margin: 0 0.5rem;
+            align-self: center;
+        }
+        /* Unicode icons styling */
+        .unicode-icon {
+            font-size: 1.5rem; /* 24px */
+            margin-right: 0.5rem; /* 8px */
+        }
+    </style>
+    </head>
+<body class="text-gray-700">
+
+    <header class="bg-palette-darkblue text-white p-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center">Perspectivas Climáticas Panamá: Resto de 2025</h1>
+            <p class="text-center text-palette-green mt-1">Un Análisis Detallado de Tendencias y Pronósticos</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="resumen" class="mb-12">
+            <h2 class="section-title">Resumen Ejecutivo: Panorama Climático 2025</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <h3 class="sub-section-title text-palette-blue">Condición ENOS Dominante</h3>
+                    <p class="stat-value text-palette-green">Neutral</p>
+                    <p class="mt-2">Se espera que la fase Neutral del ENOS predomine durante la mayor parte del resto del año, sugiriendo un retorno a patrones climáticos más cercanos a la normalidad.</p>
+                    <div class="chart-container mx-auto mt-4 h-48 max-h-48">
+                        <canvas id="ensoProbabilityChart"></canvas>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <h3 class="sub-section-title text-palette-blue">Tendencia General de Temperatura</h3>
+                    <p class="stat-value text-palette-coral">Más Cálida</p>
+                    <p class="mt-2">Las temperaturas se mantendrán consistentemente cálidas y húmedas, con anomalías positivas esperadas en gran parte del país.</p>
+                </div>
+                <div class="card text-center">
+                    <h3 class="sub-section-title text-palette-blue">Precipitación General Esperada</h3>
+                    <p class="stat-value text-palette-blue">Normal a Ligeramente Superior</p>
+                    <p class="mt-2">Lluvias generalmente normales, con tendencias a ser ligeramente superiores en la vertiente del Pacífico y posibles déficits puntuales en el Caribe.</p>
+                </div>
+            </div>
+            <div class="card mt-6">
+                <p class="text-lg">El panorama climático para lo que resta de 2025 en Panamá estará marcado por la influencia de condiciones ENSO neutrales. Esto implica una transición desde una La Niña débil a principios de año hacia un escenario de mayor normalidad climatológica. No obstante, la variabilidad regional y la influencia de otros factores, como la activa temporada de huracanes, requerirán una vigilancia constante.</p>
+            </div>
+        </section>
+
+        <section id="factores" class="mb-12">
+            <h2 class="section-title">Factores Climáticos Determinantes ("Fuerzas del Mercado")</h2>
+            <div class="card">
+                <h3 class="sub-section-title">El Fenómeno El Niño-Oscilación del Sur (ENOS)</h3>
+                <p>El ENOS es un modulador clave. Tras una La Niña débil a inicios de 2025, se proyecta una fase Neutral con más del 70% de probabilidad para el resto del primer semestre, persistiendo durante el verano y principios del otoño. Esta neutralidad sugiere lluvias más alineadas con promedios históricos, aunque no descarta eventos puntuales de fuerte intensidad.</p>
+                <div class="chart-container mx-auto mt-4">
+                    <canvas id="ensoPhasesChart"></canvas>
+                </div>
+                <p class="mt-4">La gráfica ilustra la transición de La Niña a condiciones Neutrales del ENOS y la probabilidad de persistencia de esta fase Neutral durante los trimestres clave de 2025.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="card">
+                    <h3 class="sub-section-title">Zona de Convergencia Intertropical (ZCIT)</h3>
+                    <p>Principal responsable de la temporada de lluvias. Con ENOS Neutral, se espera que la ZCIT siga su patrón climatológico anual, con una migración estacional típica que trae las lluvias sin anomalías significativas asociadas a fases fuertes de El Niño o La Niña.</p>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="font-semibold text-palette-blue">Influencia de la ZCIT:</p>
+                        <div class="flex flex-col sm:flex-row items-center justify-around mt-2 space-y-2 sm:space-y-0 sm:space-x-2">
+                            <div class="flow-item">Vientos Alisios del Norte</div>
+                            <div class="flow-arrow">convergen con</div>
+                            <div class="flow-item">Vientos Alisios del Sur</div>
+                            <div class="flow-arrow">➡️</div>
+                            <div class="flow-item bg-palette-green text-white">Zona de Lluvias (ZCIT)</div>
+                        </div>
+                    </div>
+                     <p class="mt-2">La posición y actividad de la ZCIT son cruciales para la intensidad y distribución de las precipitaciones en Panamá.</p>
+                </div>
+                <div class="card">
+                    <h3 class="sub-section-title">Vientos Alisios</h3>
+                    <p>Juegan un rol crucial. Se prevé un debilitamiento de los alisios del Noreste para mayo-julio (velocidad promedio 1-3 m/s), facilitando la temporada lluviosa. Un fortalecimiento temporal a inicios de agosto impulsa la "canícula" (periodo seco).</p>
+                    <p class="mt-2"><span class="unicode-icon text-palette-blue">🌬️</span><strong>Estación Seca:</strong> Alisios fuertes contribuyen a condiciones secas.</p>
+                    <p class="mt-1"><span class="unicode-icon text-palette-green">💧</span><strong>Estación Lluviosa:</strong> Debilitamiento de alisios del NE favorece lluvias.</p>
+                    <p class="mt-1"><span class="unicode-icon text-palette-yellow">☀️</span><strong>Canícula (Julio/Agosto):</strong> Aumento temporal de velocidad de alisios genera sequía relativa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pronostico_periodo" class="mb-12">
+            <h2 class="section-title">Pronóstico Detallado por Período ("Rendimiento por Segmento")</h2>
+
+            <div class="card mb-8">
+                <h3 class="sub-section-title">Mayo - Julio 2025: Inicio y Establecimiento de la Temporada Lluviosa</h3>
+                <p>Este trimestre marca la consolidación de las lluvias, especialmente en la vertiente del Pacífico. Se espera un inicio pleno entre la tercera década de mayo y los primeros 10 días de junio. Las lluvias serían normales en general, con tendencias a ligeros excedentes (+10%) en el Pacífico y posibles déficits (-10%) en el Caribe. Las temperaturas serán más cálidas en todo el país (+0.25 a +0.5°C sobre lo normal en varias regiones del Pacífico y Valle Central).</p>
+                <p class="mt-2"><strong>Canícula:</strong> Podría iniciar más temprano en julio, causando lluvias deficitarias en algunas zonas de Centroamérica, aunque en Panamá se esperan condiciones variables.</p>
+                <div class="chart-container mx-auto mt-4">
+                    <canvas id="precipitacionMayoJulioChart"></canvas>
+                </div>
+                <p class="mt-4 text-sm text-center">Tendencia de precipitación para Mayo-Julio 2025 por macro-región.</p>
+            </div>
+
+            <div class="card mb-8">
+                <h3 class="sub-section-title">Agosto - Octubre 2025: Pico de la Temporada Lluviosa</h3>
+                <p>Este es el clímax de las lluvias, con septiembre y octubre como los meses de máximos acumulados. Se proyectan precipitaciones superiores a lo normal en la mayor parte del país. En la vertiente del Pacífico (Chiriquí Centro-Oriente, Veraguas Centro y Sur, Los Santos Sur, Coclé Sur, Darién Sur) el aumento podría ser del 15-20% sobre lo normal. El Caribe podría mantener condiciones deficitarias. Las temperaturas seguirán más cálidas.</p>
+                <p class="mt-2">El "contraste térmico de los océanos" (Pacífico más frío al sur de Panamá, Caribe y Atlántico más cálidos) influye en esta divergencia regional de lluvias.</p>
+                <div class="chart-container mx-auto mt-4">
+                    <canvas id="precipitacionAgostoOctubreChart"></canvas>
+                </div>
+                <p class="mt-4 text-sm text-center">Anomalía de precipitación esperada para Agosto-Octubre 2025 en regiones clave del Pacífico.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="sub-section-title">Noviembre - Diciembre 2025: Transición a la Temporada Seca</h3>
+                <p>Las lluvias disminuyen gradualmente. Noviembre aún presenta lluvias significativas, con tendencia a la baja en Bocas del Toro Norte, Colón y Guna Yala, y normal con tendencia al alza en el resto. Diciembre tendrá acumulados normales con tendencia al alza y eventos puntuales superiores. La vertiente Atlántica tendrá lluvias ligeras a moderadas, mientras el Pacífico será más seco y ventoso. Diciembre podría ser caluroso por brisas del Pacífico.</p>
+                <div class="chart-container mx-auto mt-4">
+                    <canvas id="diasLluviaNovDicChart"></canvas>
+                </div>
+                <p class="mt-4 text-sm text-center">Promedio de días de lluvia para Noviembre y Diciembre (basado en climatología general).</p>
+            </div>
+        </section>
+
+        <section id="huracanes" class="mb-12">
+            <h2 class="section-title">Temporada de Huracanes 2025 ("Riesgos Externos")</h2>
+            <div class="card">
+                <p>Se pronostica una temporada de huracanes más activa de lo normal tanto en el Atlántico (1 Jun - 30 Nov) como en el Pacífico (desde 15 Mayo). Aunque Panamá rara vez sufre impactos directos, el riesgo de efectos indirectos (lluvias intensas, crecidas, deslizamientos) es elevado.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                        <h4 class="font-semibold text-palette-blue text-lg mb-2">Pronóstico Atlántico (NOAA)</h4>
+                        <ul class="list-disc list-inside bg-blue-50 p-3 rounded">
+                            <li>Tormentas con nombre: 13-19</li>
+                            <li>Huracanes: 6-10</li>
+                        </ul>
+                        <p class="text-xs mt-1">Factores: Altas TSM, posible La Niña (aunque ENOS se prevé neutral).</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-palette-green text-lg mb-2">Pronóstico Pacífico Oriental (SMN México)</h4>
+                        <ul class="list-disc list-inside bg-green-50 p-3 rounded">
+                            <li>Tormentas con nombre: 16-20</li>
+                            <li>Huracanes: 8-11</li>
+                            <li>Huracanes Mayores: 4-6</li>
+                        </ul>
+                        <p class="text-xs mt-1">Factor: "Albercas de calor" oceánicas podrían intensificar sistemas.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                     <h4 class="font-semibold text-palette-coral text-lg mb-2">Riesgos Indirectos para Panamá:</h4>
+                     <div class="flex items-center mb-2 p-3 bg-red-50 rounded">
+                        <span class="unicode-icon text-palette-coral">🌧️</span>
+                        <p>Lluvias intensas: Acumulados diarios de 40-160 mm, puntualmente 70-250 mm.</p>
+                     </div>
+                     <div class="flex items-center mb-2 p-3 bg-red-50 rounded">
+                        <span class="unicode-icon text-palette-coral">🏞️</span>
+                        <p>Crecidas de ríos, inundaciones (urbanas y rurales), deslizamientos de tierra.</p>
+                     </div>
+                     <div class="flex items-center p-3 bg-red-50 rounded">
+                        <span class="unicode-icon text-palette-coral">💨</span>
+                        <p>Vientos en ráfagas de 40-60 km/h (no huracanados).</p>
+                     </div>
+                </div>
+                <p class="mt-4 text-sm">La clave es la preparación ante estos efectos hidrológicos, más que por vientos directos de huracán.</p>
+            </div>
+        </section>
+
+        <section id="recomendaciones" class="mb-12">
+            <h2 class="section-title">Consideraciones y Recomendaciones ("Estrategias Clave")</h2>
+            <div class="card">
+                <h3 class="sub-section-title text-palette-darkblue">Fuente Oficial Primordial: IMHPA</h3>
+                <div class="p-4 bg-palette-darkblue text-white rounded-lg text-center">
+                    <img src="https://placehold.co/100x50/ffffff/073B4C?text=IMHPA" alt="Logo IMHPA Placeholder" class="mx-auto mb-2 rounded" onerror="this.src='https://placehold.co/100x50/ffffff/073B4C?text=IMHPA'; this.onerror=null;">
+                    <p class="font-bold text-lg">Instituto de Meteorología e Hidrología de Panamá</p>
+                    <p>Consulte sus boletines y alertas oficiales para información actualizada y localizada.</p>
+                    <a href="#" class="mt-2 inline-block bg-palette-green hover:bg-opacity-80 text-white font-semibold py-2 px-4 rounded">Visitar IMHPA (Ejemplo)</a>
+                </div>
+
+                <h3 class="sub-section-title mt-6">Recomendaciones Prácticas:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="p-4 border border-palette-blue rounded-lg">
+                        <h4 class="font-semibold text-palette-blue mb-1">Población General:</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Mantenerse informado vía fuentes oficiales (IMHPA).</li>
+                            <li>Estar alerta a avisos de crecidas, deslizamientos e inundaciones.</li>
+                            <li>Evitar cruzar ríos o quebradas crecidas.</li>
+                            <li>Atender áreas vulnerables a deslizamientos.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 border border-palette-green rounded-lg">
+                        <h4 class="font-semibold text-palette-green mb-1">Sector Agrícola:</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Planificar cultivos según perspectivas de lluvia regionales (excesos/déficits).</li>
+                            <li>Recordar que las lluvias son vitales para reservas de agua (Canal de Panamá).</li>
+                        </ul>
+                    </div>
+                     <div class="p-4 border border-palette-yellow rounded-lg md:col-span-2">
+                        <h4 class="font-semibold text-palette-yellow mb-1">Sector Turismo:</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Estación seca (Ene-Mar) ideal para playas/aventuras.</li>
+                            <li>Panamá ofrece atractivos todo el año.</li>
+                            <li>Avistamiento de ballenas jorobadas (Pacífico): Ago-Oct.</li>
+                            <li>Considerar pronósticos locales para actividades al aire libre.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-palette-yellow text-yellow-700">
+                    <p class="font-bold">Naturaleza Probabilística de los Pronósticos:</p>
+                    <p>Los pronósticos a largo plazo son proyecciones. Eventos puntuales de fuerte intensidad y corta duración pueden ocurrir y no siempre son predecibles con mucha antelación. La preparación y respuesta rápida son cruciales.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center py-8 border-t border-gray-300">
+            <p class="text-sm text-gray-600">&copy; 2025 Infografía Climática de Panamá. Basado en el informe "El Clima General en Panamá durante el Resto del Año 2025".</p>
+            <p class="text-xs text-gray-500 mt-1">Esta es una representación visual con fines informativos. Consulte siempre fuentes oficiales para decisiones críticas.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const CHART_COLORS = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            darkBlue: '#073B4C',
+            lightGray: '#E5E7EB' // For grid lines
+        };
+
+        function processLabels(labels) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > 16) {
+                    const words = label.split(' ');
+                    const newLabel = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                            newLabel.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    newLabel.push(currentLine.trim());
+                    return newLabel;
+                }
+                return label;
+            });
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: CHART_COLORS.darkBlue
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    backgroundColor: CHART_COLORS.darkBlue,
+                    titleColor: CHART_COLORS.green,
+                    bodyColor: 'white',
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: CHART_COLORS.darkBlue },
+                    grid: { color: CHART_COLORS.lightGray }
+                },
+                y: {
+                    ticks: { color: CHART_COLORS.darkBlue },
+                    grid: { color: CHART_COLORS.lightGray },
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Gráfica 1: Probabilidad ENOS Neutral
+        const ensoProbabilityCtx = document.getElementById('ensoProbabilityChart').getContext('2d');
+        new Chart(ensoProbabilityCtx, {
+            type: 'doughnut',
+            data: {
+                labels: processLabels(['ENSO Neutral (>70%)', 'Otras Fases (<30%)']),
+                datasets: [{
+                    label: 'Probabilidad ENOS',
+                    data: [75, 25], // Dato representativo basado en ">70%"
+                    backgroundColor: [CHART_COLORS.green, CHART_COLORS.yellow],
+                    borderColor: ['white'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: CHART_COLORS.darkBlue } },
+                    title: { display: true, text: 'Prob. ENOS Neutral (1er Semestre y Verano)', color: CHART_COLORS.darkBlue },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        // Gráfica 2: Fases ENOS (Ejemplo de transición)
+        const ensoPhasesCtx = document.getElementById('ensoPhasesChart').getContext('2d');
+        new Chart(ensoPhasesCtx, {
+            type: 'line',
+            data: {
+                labels: processLabels(['Ene-Mar 2025', 'Mar-May 2025', 'Jun-Ago 2025', 'Ago-Oct 2025']),
+                datasets: [
+                    {
+                        label: 'Prob. La Niña',
+                        data: [59, 20, 10, 5], // Datos ilustrativos basados en texto
+                        borderColor: CHART_COLORS.blue,
+                        backgroundColor: CHART_COLORS.blue + '33', // semi-transparent
+                        tension: 0.1,
+                        fill: true
+                    },
+                    {
+                        label: 'Prob. Neutral',
+                        data: [40, 60, 74, 55], // Datos ilustrativos basados en texto
+                        borderColor: CHART_COLORS.green,
+                        backgroundColor: CHART_COLORS.green + '33',
+                        tension: 0.1,
+                        fill: true
+                    }
+                ]
+            },
+            options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, title: { display: true, text: 'Transición y Probabilidad Fases ENOS 2025', color: CHART_COLORS.darkBlue } } }
+        });
+
+        // Gráfica 3: Precipitación Mayo-Julio
+        const precipMayJulCtx = document.getElementById('precipitacionMayoJulioChart').getContext('2d');
+        new Chart(precipMayJulCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Pacífico Norte, Central, Sur, Occ., Valle Central', 'Caribe Norte, Sur, Zona Norte Oriental']),
+                datasets: [{
+                    label: 'Tendencia de Precipitación (% sobre/bajo normal)',
+                    data: [5, -5], // Representa +10% y -10% como rango medio
+                    backgroundColor: [CHART_COLORS.blue, CHART_COLORS.yellow],
+                    borderColor: [CHART_COLORS.darkBlue, CHART_COLORS.darkBlue],
+                    borderWidth: 1
+                }]
+            },
+             options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, title: { display: true, text: 'Precipitación Mayo-Julio: Tendencia vs Normal', color: CHART_COLORS.darkBlue } } }
+        });
+
+        // Gráfica 4: Precipitación Agosto-Octubre
+        const precipAugOctCtx = document.getElementById('precipitacionAgostoOctubreChart').getContext('2d');
+        new Chart(precipAugOctCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Chiriquí (C-O), Veraguas (C-S), Los Santos (S), Coclé (S), Darién (S)', 'Pacífico Norte, Central, Valle Central', 'Caribe (General)']),
+                datasets: [{
+                    label: 'Anomalía de Precipitación Esperada (%)',
+                    data: [17.5, 10, -5], // Promedio de 15-20%, >normal, deficitario
+                    backgroundColor: [CHART_COLORS.green, CHART_COLORS.blue, CHART_COLORS.yellow],
+                    borderColor: [CHART_COLORS.darkBlue, CHART_COLORS.darkBlue, CHART_COLORS.darkBlue],
+                    borderWidth: 1
+                }]
+            },
+            options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, title: { display: true, text: 'Precipitación Agosto-Octubre: Anomalía Esperada', color: CHART_COLORS.darkBlue } } }
+        });
+        
+        // Gráfica 5: Días de Lluvia Nov-Dic (Climatología)
+        const diasLluviaCtx = document.getElementById('diasLluviaNovDicChart').getContext('2d');
+        new Chart(diasLluviaCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Noviembre (Promedio)', 'Diciembre (Promedio)']),
+                datasets: [{
+                    label: 'Días Promedio de Lluvia',
+                    data: [21, 11], // Datos del informe
+                    backgroundColor: [CHART_COLORS.blue, CHART_COLORS.green],
+                }]
+            },
+            options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, title: { display: true, text: 'Días de Lluvia Promedio: Fin de Año', color: CHART_COLORS.darkBlue } } }
+        });
+
+    </script>
+</body>
+</html>
